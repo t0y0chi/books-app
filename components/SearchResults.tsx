@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BookItem } from "@/types/google-books";
 import { Pagination } from "./Pagination";
-import { SearchFilters } from "./SearchFilters";
+import { Badge } from "@/components/ui/badge";
 
 interface SearchResultsProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -25,40 +25,61 @@ export default async function SearchResults({ searchParams }: SearchResultsProps
     const data = await searchBooks(query, page, { langRestrict, orderBy, filter });
 
     if (!data.items?.length) {
-      return <p className="text-center">検索結果が見つかりませんでした。</p>;
+      return (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">検索結果が見つかりませんでした。</p>
+        </div>
+      );
     }
 
     return (
       <div>
-        <SearchFilters />
         <div className="grid gap-4 md:grid-cols-2">
           {data.items.map((book: BookItem) => (
-            <Card key={book.id}>
-              <CardContent className="flex gap-4 p-4">
-                {book.volumeInfo.imageLinks?.thumbnail && (
-                  <div className="flex-shrink-0">
-                    <Image
-                      src={book.volumeInfo.imageLinks.thumbnail.replace('http:', 'https:')}
-                      alt={book.volumeInfo.title}
-                      width={128}
-                      height={192}
-                      className="object-cover"
-                    />
-                  </div>
-                )}
-                <div className="flex-grow">
-                  <h2 className="font-bold mb-2">
-                    <Link href={`/books/${book.id}`} className="hover:underline">
-                      {book.volumeInfo.title}
-                    </Link>
-                  </h2>
-                  {book.volumeInfo.authors?.length && (
-                    <p className="text-sm text-gray-600">
-                      著者: {book.volumeInfo.authors.join(', ')}
-                    </p>
+            <Card key={book.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+              <Link href={`/books/${book.id}`}>
+                <CardContent className="flex gap-4 p-4">
+                  {book.volumeInfo.imageLinks?.thumbnail ? (
+                    <div className="flex-shrink-0">
+                      <Image
+                        src={book.volumeInfo.imageLinks.thumbnail.replace('http:', 'https:')}
+                        alt={book.volumeInfo.title}
+                        width={128}
+                        height={192}
+                        className="object-cover rounded-md shadow-sm"
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex-shrink-0 w-[128px] h-[192px] bg-muted flex items-center justify-center rounded-md">
+                      <span className="text-muted-foreground">No image</span>
+                    </div>
                   )}
-                </div>
-              </CardContent>
+                  <div className="flex-grow space-y-2">
+                    <h2 className="font-bold line-clamp-2 hover:text-primary transition-colors">
+                      {book.volumeInfo.title}
+                    </h2>
+                    {book.volumeInfo.authors?.length && (
+                      <p className="text-sm text-muted-foreground">
+                        {book.volumeInfo.authors.join(', ')}
+                      </p>
+                    )}
+                    {book.volumeInfo.publishedDate && (
+                      <p className="text-sm text-muted-foreground">
+                        出版: {book.volumeInfo.publishedDate}
+                      </p>
+                    )}
+                    {book.volumeInfo.categories?.length && (
+                      <div className="flex gap-2 flex-wrap">
+                        {book.volumeInfo.categories.slice(0, 2).map((category) => (
+                          <Badge key={category} variant="secondary">
+                            {category}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Link>
             </Card>
           ))}
         </div>
@@ -66,6 +87,10 @@ export default async function SearchResults({ searchParams }: SearchResultsProps
       </div>
     );
   } catch (error) {
-    return <p className="text-center text-red-500">エラーが発生しました。もう一度お試しください。</p>;
+    return (
+      <div className="text-center py-12">
+        <p className="text-red-500">エラーが発生しました。もう一度お試しください。</p>
+      </div>
+    );
   }
-} 
+}
