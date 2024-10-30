@@ -66,16 +66,10 @@ tree -L 2 -I "node_modules|.git"
 下記のようなプロンプトを入力し実行。
 
 ```
-@Codebase @instructions.md をもとに書籍検索アプリを作成して。
-まずは4.1 検索機能を作成して
-```
-
-```
-次に4.2 書籍詳細表示を作成して
+@Codebase @instructions.md をもとにステップバイステップで書籍検索アプリを作成して
 ```
 
 # 参考資料
 - https://www.youtube.com/watch?v=2PjmPU07KNs
 - https://www.cursor.com/
-- https://ui.shadcn.com/
 - https://developers.google.com/books/docs/v1/getting_started
