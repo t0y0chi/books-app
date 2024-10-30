@@ -1,4 +1,5 @@
 const GOOGLE_BOOKS_API_URL = 'https://www.googleapis.com/books/v1/volumes';
+const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY;
 
 interface SearchOptions {
   langRestrict?: string;
@@ -12,6 +13,7 @@ export async function searchBooks(query: string, page: number = 1, options: Sear
     q: query,
     startIndex: startIndex.toString(),
     maxResults: '10',
+    key: API_KEY || '',
   });
 
   if (options.langRestrict) {
@@ -34,7 +36,11 @@ export async function searchBooks(query: string, page: number = 1, options: Sear
 }
 
 export async function getBookById(id: string) {
-  const response = await fetch(`${GOOGLE_BOOKS_API_URL}/${id}`);
+  const params = new URLSearchParams({
+    key: API_KEY || '',
+  });
+  
+  const response = await fetch(`${GOOGLE_BOOKS_API_URL}/${id}?${params.toString()}`);
 
   if (!response.ok) {
     throw new Error('Failed to fetch book details');

@@ -86,7 +86,7 @@ export default async function SearchResults({ searchParams }: SearchResultsProps
         <Pagination totalItems={data.totalItems} />
       </div>
     );
-  } catch (error) {
+  } catch {
     return (
       <div className="text-center py-12">
         <p className="text-red-500">エラーが発生しました。もう一度お試しください。</p>

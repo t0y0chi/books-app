@@ -7,6 +7,11 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 export const metadata: Metadata = {
   title: "Book Search - Google Books APIを使用した書籍検索",
   description: "Google Books APIを利用して書籍を検索できるアプリケーション",
+  openGraph: {
+    title: "Book Search",
+    description: "Google Books APIを利用した書籍検索アプリケーション",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
