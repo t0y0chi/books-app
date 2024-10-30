@@ -47,7 +47,7 @@ export default function AboutPage() {
                 アプリを使ってみる
               </Button>
             </Link>
-            <Link href="https://github.com/yourusername/books-app" target="_blank" rel="noopener noreferrer">
+            <Link href="https://github.com/t0y0chi/books-app" target="_blank" rel="noopener noreferrer">
               <Button variant="outline">
                 <Github className="mr-2 h-4 w-4" />
                 ソースコードを見る

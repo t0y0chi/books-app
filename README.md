@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Book Search
 
-## Getting Started
+Google Books APIを利用した書籍検索アプリケーション。
 
-First, run the development server:
+## 機能
+
+- 書籍の検索（タイトル、著者名、ISBN）
+- 検索結果のフィルタリング
+  - 言語（日本語/英語）
+  - 並び順（関連度/新着順）
+  - 無料書籍のみ表示
+- 書籍詳細情報の表示
+- ダークモード対応
+- レスポンシブデザイン
+
+## 技術スタック
+
+- [Next.js 14](https://nextjs.org/) (App Router)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Google Books API](https://developers.google.com/books)
+
+## 開発環境のセットアップ
 
 ```bash
+# リポジトリのクローン
+git clone https://github.com/t0y0chi/books-app.git
+cd books-app
+
+# 依存関係のインストール
+npm install
+
+# 環境変数の設定
+cp .env.example .env.local
+# .env.localにGoogle Books APIキーを設定
+
+# 開発サーバーの起動
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いて確認できます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 環境変数
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| 変数名 | 説明 | 必須 |
+|--------|------|------|
+| NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY | Google Books APIキー | ✅ |
 
-## Learn More
+## デプロイ
 
-To learn more about Next.js, take a look at the following resources:
+このプロジェクトは [Vercel](https://vercel.com) にデプロイすることを推奨します。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyourusername%2Fbooks-app)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 開発
 
-## Deploy on Vercel
+```bash
+# 依存関係のインストール
+npm install
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 開発サーバーの起動
+npm run dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# ビルド
+npm run build
+
+# 本番環境の起動
+npm start
+
+# リントの実行
+npm run lint
+```
+
+## ライセンス
+
+MIT
+
+## 作者
+
+Your Name
