@@ -1,10 +1,30 @@
 const GOOGLE_BOOKS_API_URL = 'https://www.googleapis.com/books/v1/volumes';
 
-export async function searchBooks(query: string, page: number = 1) {
+interface SearchOptions {
+  langRestrict?: string;
+  orderBy?: string;
+  filter?: string;
+}
+
+export async function searchBooks(query: string, page: number = 1, options: SearchOptions = {}) {
   const startIndex = (page - 1) * 10;
-  const response = await fetch(
-    `${GOOGLE_BOOKS_API_URL}?q=${encodeURIComponent(query)}&startIndex=${startIndex}&maxResults=10`
-  );
+  const params = new URLSearchParams({
+    q: query,
+    startIndex: startIndex.toString(),
+    maxResults: '10',
+  });
+
+  if (options.langRestrict) {
+    params.append('langRestrict', options.langRestrict);
+  }
+  if (options.orderBy) {
+    params.append('orderBy', options.orderBy);
+  }
+  if (options.filter) {
+    params.append('filter', options.filter);
+  }
+
+  const response = await fetch(`${GOOGLE_BOOKS_API_URL}?${params.toString()}`);
 
   if (!response.ok) {
     throw new Error('Failed to fetch books');
