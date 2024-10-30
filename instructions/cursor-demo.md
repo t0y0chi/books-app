@@ -66,7 +66,7 @@ tree -L 2 -I "node_modules|.git"
 下記のようなプロンプトを入力し実行。
 
 ```
-@instructions.md をもとに書籍検索アプリを作成して。
+@Codebase @instructions.md をもとに書籍検索アプリを作成して。
 まずは4.1 検索機能を作成して
 ```
 
