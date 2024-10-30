@@ -71,11 +71,3 @@ npm start
 # リントの実行
 npm run lint
 ```
-
-## ライセンス
-
-MIT
-
-## 作者
-
-Your Name
